@@ -47,6 +47,17 @@ app.post('/add', async (req, res) => {
     }
 });
 
+// Rota para Deletar tarefa
+app.post('/delete/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        await Tarefa.findByIdAndDelete(id);
+        res.redirect('/');
+    } catch (err) {
+        res.status(500).send("Erro ao deletar tarefa");
+    }
+});
+
 // --- 6. INICIALIZAÇÃO DO SERVIDOR ---
 // Sempre a última coisa: abre a porta para o mundo
 const PORT = 3000;
